@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+.poppins-font {
+  font-family: "Poppins", sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #007bff, #6f42c1, #e83e8c);
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: transparent;
+}
+
+.hover-effect:hover {
+  color: red;
+  transition: 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* .desktop:hover {
+  background-color: white;
+  color: darkblue;
+  border-radius: 5px; */
+/* transition-delay: 0.5s; */
+/* } */

@@ -1,0 +1,26 @@
+/* write your css here */
+/* body {
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Poppins", sans-serif !important;
+}
+
+@keyframes smooth-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3; /* Not fully invisible, smoother feel */
+  }
+}
+
+.blink {
+  animation: smooth-blink 0.8s ease-in-out infinite;
+}

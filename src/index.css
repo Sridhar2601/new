@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-gray-300 font-inter;
+}
+
+/* 🧩 Custom components */
+@layer components {
+  .sub-menu {
+    @apply absolute top-[4.2rem] p-[15px] rounded-[6px] origin-[50%_-170px] backdrop-blur bg-white/[0.04];
+  }
+}
+
+/* 🧩 Custom utilities */
+@layer utilities {
+  .flex-center {
+    @apply flex items-center;
+  }
+
+  .flex-center-between {
+    @apply flex items-center justify-between;
+  }
+}
+
+.brand-motion {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0d6efd !important;
+  animation: motionRepeat 2s infinite alternate;
+}
+
+.blink {
+  animation: smooth-blink 0.8s ease-in-out infinite;
+}
+
+@keyframes zoomInOut {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes textBlink {
+
+  0%,
+  100% {
+    color: #ffffff;
+    /* white */
+  }
+
+  50% {
+    color: #facc15;
+    /* yellow-400 */
+  }
+}
+
+.animate-text-blink {
+  animation: textBlink 1s infinite;
+}
