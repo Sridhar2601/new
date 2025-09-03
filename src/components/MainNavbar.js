@@ -360,13 +360,13 @@ const Menus = [
     name: "Software courses",
     subMenu: [
       { name: "Python", icon: Database, to: "/courses/python" },
-      { name: "C Programming", icon: Code2, to: "/courses/c programming" },
+      { name: "C Programming", icon: Code2, to: "/courses/c-programming" },
       { name: "C++ Programming", icon: Braces, to: "/courses/cpp" },
       { name: "Java", icon: MonitorSmartphone, to: "/courses/java" },
       { name: "HTML", icon: MonitorSmartphone, to: "/courses/html" },
       { name: "ASP.NET", icon: Server, to: "/courses/asp-net" },
       { name: ".NET", icon: Database, to: "/courses/dotnet-full-stack" },
-      { name: "Basic Computer", icon: Server, to: "/courses/basic_computer" },
+      { name: "Basic Computer", icon: Server, to: "/courses/basic-computer" },
       { name: "Foxpro Programming", icon: Code2, to: "/courses/foxpro" },
       { name: "Linux", icon: Code2, to: "/courses/linux" },
       { name: "SQL", icon: Code2, to: "/courses/sql" },
@@ -380,7 +380,7 @@ const Menus = [
       { name: "A+N+", icon: Code2, to: "/courses/a+n+" },
       { name: "CCNA", icon: Braces, to: "/courses/ccna" },
       { name: "CCNP", icon: MonitorSmartphone, to: "/courses/ccnp" },
-      { name: "redhat linux", icon: Server, to: "/courses/redhat-linux" },
+      { name: "Redhat Linux", icon: Server, to: "/courses/redhat-linux" },
       { name: "Microsoft Server", icon: Server, to: "/courses/microsoft-server" },
       { name: "DTP", icon: Braces, to: "/courses/dtp" },
     ],
@@ -414,14 +414,13 @@ const Menus = [
     ],
     gridCols: 1,
   },
-
   { name: "Contact", to: "/contact" },
 ];
 
 export default function MainNavbar() {
-  const [isHover, setIsHover] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [clicked, setClicked] = useState(null);
+  const [isHover, setIsHover] = useState(null); // desktop hover
+  const [isOpen, setIsOpen] = useState(false); // mobile drawer
+  const [clicked, setClicked] = useState(null); // mobile submenu toggle
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -429,200 +428,140 @@ export default function MainNavbar() {
   };
 
   const subMenuAnimate = {
-    enter: {
-      opacity: 1,
-      rotateX: 0,
-      transition: { duration: 0.5 },
-      display: "block",
-    },
-    exit: {
-      opacity: 0,
-      rotateX: -15,
-      transition: { duration: 0.5 },
-      transitionEnd: { display: "none" },
-    },
+    enter: { opacity: 1, rotateX: 0, transition: { duration: 0.5 }, display: "block" },
+    exit: { opacity: 0, rotateX: -15, transition: { duration: 0.5 }, transitionEnd: { display: "none" } },
   };
 
-  // const subMenuDrawer = {
-  //   enter: { height: "auto", overflow: "hidden" },
-  //   exit: { height: 0, overflow: "hidden" },
-  // };
-
   const subMenuDrawer = {
-    enter: {
-      height: "auto",
-      opacity: 1,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
-    exit: {
-      height: 0,
-      opacity: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
+    enter: { height: "auto", opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
+    exit: { height: 0, opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
   };
 
   return (
-    <>
-      {/* <TopNavbar /> */}
-
-      <header className="h-16 text-[15px] fixed inset-0 flex-center bg-[#0A1D3A] z-50 ">
-        <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto">
-          <div className="flex-center gap-x-3 z-[999] relative">
-            <Link
-              to="/"
-              style={{
-                animation: "zoomInOut 2.5s ease-in-out infinite",
-              }}
-              className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-300 hover:drop-shadow-md hover:scale-105"
-            >
-              CSG Education
-            </Link>
-          </div>
-
-          {/* Desktop */}
-          <ul
-            className="gap-x-1 lg:flex-center hidden  "
-            style={{ color: "white" }}
+    <header className="h-16 text-[15px] fixed inset-0 flex-center bg-[#0A1D3A] z-50">
+      <nav className="px-3.5 flex-center-between w-full max-w-7xl mx-auto">
+        {/* Logo */}
+        <div className="flex-center gap-x-3 z-[999] relative">
+          <Link
+            to="/"
+            style={{ animation: "zoomInOut 2.5s ease-in-out infinite" }}
+            className="text-3xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-300 hover:drop-shadow-md hover:scale-105"
           >
-            {Menus.map((menu, index) => {
-              const hasSubMenu = menu?.subMenu?.length;
-              return (
-                <motion.li
-                  key={menu.name}
-                  className="group/link desktop  "
-                  // style={{ backgroundColor: "blue", borderRadius: "5px" }}
-                  onHoverStart={() => setIsHover(index)}
-                  onHoverEnd={() => setIsHover(null)}
-                >
-                  {hasSubMenu ? (
-                    <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
-                      {menu.name}
-                      <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-                    </span>
-                  ) : (
-                    <Link
-                      to={menu.to}
-                      className="flex-center gap-1 hover:bg-white/5 px-3 py-1 rounded-xl"
-                    >
-                      {menu.name}
-                    </Link>
-                  )}
+            CSG Education
+          </Link>
+        </div>
 
-                  {hasSubMenu && (
-                    <motion.div
-                      className="sub-menu absolute mt-2 p-4 rounded-lg  bg-[#0A1D3A] text-white  shadow-lg"
-                      initial="exit"
-                      animate={isHover === index ? "enter" : "exit"}
-                      variants={subMenuAnimate}
-                    >
-                      <div
-                        className={`grid gap-7 ${menu.gridCols === 2 ? "grid-cols-2" : "grid-cols-1"
-                          }`}
-                      >
-                        {menu.subMenu.map((submenu, i) => (
-                          <Link
-                            to={submenu.to}
-                            key={i}
-                            className="relative cursor-pointer"
-                          >
-                            <div className="flex-center gap-x-4 group/menubox">
-                              <div className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
-                                <submenu.icon />
-                              </div>
-                              <div>
-                                <h6 className="font-semibold bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
-                                  {submenu.name}
-                                </h6>
-                              </div>
+        {/* Desktop Menu */}
+        <ul className="gap-x-1 lg:flex-center hidden text-white">
+          {Menus.map((menu, index) => {
+            const hasSubMenu = menu?.subMenu?.length;
+            return (
+              <motion.li
+                key={menu.name}
+                className="group/link desktop relative"
+                onHoverStart={() => setIsHover(index)}
+                onHoverEnd={() => setIsHover(null)}
+              >
+                {hasSubMenu ? (
+                  <span className="flex-center gap-1 hover:bg-white/5 cursor-pointer px-3 py-1 rounded-xl">
+                    {menu.name}
+                    <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
+                  </span>
+                ) : (
+                  <Link to={menu.to} className="flex-center gap-1 hover:bg-white/5 px-3 py-1 rounded-xl">
+                    {menu.name}
+                  </Link>
+                )}
+
+                {hasSubMenu && (
+                  <motion.div
+                    className="sub-menu absolute mt-2 p-4 rounded-lg bg-[#0A1D3A] text-white shadow-lg"
+                    initial="exit"
+                    animate={isHover === index ? "enter" : "exit"}
+                    variants={subMenuAnimate}
+                  >
+                    <div className={`grid gap-7 ${menu.gridCols === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
+                      {menu.subMenu.map((submenu, i) => (
+                        <Link to={submenu.to} key={i} className="relative cursor-pointer">
+                          <div className="flex-center gap-x-4 group/menubox">
+                            <div className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
+                              <submenu.icon />
                             </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </motion.li>
-              );
-            })}
-          </ul>
+                            <h6 className="font-semibold bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
+                              {submenu.name}
+                            </h6>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </motion.li>
+            );
+          })}
+        </ul>
 
-          {/* Right Side + Mobile */}
-          <div className="flex-center gap-x-5">
-            <div className="lg:hidden z-[999]">
-              <button onClick={toggleDrawer}>
-                {isOpen ? <X /> : <Menu />}
-              </button>
-            </div>
-          </div>
-        </nav>
+        {/* Mobile Toggle */}
+        <div className="flex-center gap-x-5 lg:hidden z-[999]">
+          <button onClick={toggleDrawer}>{isOpen ? <X /> : <Menu />}</button>
+        </div>
+      </nav>
 
-        {/* Mobile Drawer */}
-        {/* <motion.div
-          className="fixed left-0 right-0 top-16 overflow-y-auto h-full  bg-[#0A1D3A] backdrop-blur text-white p-6 pb-20 z-40"
-          initial={{ x: "-100%" }}
-          animate={{ x: isOpen ? "0%" : "-100%" }}
-        > */}
-
-        {/* Mobile Drawer */}
-        <motion.div
-          className="fixed left-0 right-0 top-16 overflow-y-auto h-full bg-[#0A1D3A] text-white p-6 pb-20 z-40"
-          initial={{ x: "-100%" }}
-          animate={{ x: isOpen ? "0%" : "-100%" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        >
-          <ul>
-            {Menus.map(({ name, to, subMenu }, i) => {
-              const isClicked = clicked === i;
-              const hasSubMenu = subMenu?.length;
-
-              return (
-                <li key={name}>
-                  {hasSubMenu ? (
-                    <span
-                      className="flex-center-between p-4 hover:bg-white/5 rounded-md cursor-pointer"
-                      onClick={() => setClicked(isClicked ? null : i)}
+      {/* Mobile Drawer */}
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: isOpen ? 0 : "100%" }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="fixed top-0 right-0 w-72 h-screen bg-[#0A1D3A] text-white shadow-lg p-6 overflow-y-auto lg:hidden z-[998]"
+      >
+        <ul className="flex flex-col gap-4">
+          {Menus.map((menu, index) => {
+            const hasSubMenu = menu?.subMenu?.length;
+            return (
+              <li key={menu.name} className="w-full">
+                {hasSubMenu ? (
+                  <>
+                    <button
+                      className="flex justify-between items-center w-full px-2 py-2 rounded-lg hover:bg-white/10"
+                      onClick={() => setClicked(clicked === index ? null : index)}
                     >
-                      {name}
-                      <ChevronDown
-                        className={`ml-auto transition-transform duration-200 ${isClicked ? "rotate-180" : ""}`}
-                      />
-                    </span>
-                  ) : (
-                    <Link
-                      to={to}
-                      onClick={() => setIsOpen(false)}
-                      className="flex-center-between p-4 hover:bg-white/5 rounded-md cursor-pointer block"
-                    >
-                      {name}
-                    </Link>
-                  )}
+                      <span>{menu.name}</span>
+                      <ChevronDown className={`transform transition-transform ${clicked === index ? "rotate-180" : ""}`} />
+                    </button>
 
-                  {hasSubMenu && (
                     <motion.ul
                       initial="exit"
-                      animate={isClicked ? "enter" : "exit"}
+                      animate={clicked === index ? "enter" : "exit"}
                       variants={subMenuDrawer}
-                      className="ml-5 overflow-hidden"
+                      className="pl-4 flex flex-col gap-2 overflow-hidden"
                     >
-                      {subMenu.map(({ name, icon: Icon, to }) => (
+                      {menu.subMenu.map((submenu, i) => (
                         <Link
-                          to={to}
-                          key={name}
-                          onClick={() => setIsOpen(false)}
-                          className="p-2 flex-center hover:bg-white/5 rounded-md gap-x-2 cursor-pointer block"
+                          to={submenu.to}
+                          key={i}
+                          onClick={toggleDrawer}
+                          className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-white/10"
                         >
-                          <Icon size={17} />
-                          {name}
+                          <submenu.icon size={18} />
+                          {submenu.name}
                         </Link>
                       ))}
                     </motion.ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </motion.div>
-
-      </header>
-    </>
+                  </>
+                ) : (
+                  <Link
+                    to={menu.to}
+                    onClick={toggleDrawer}
+                    className="block px-2 py-2 rounded-lg hover:bg-white/10"
+                  >
+                    {menu.name}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </motion.div>
+    </header>
   );
 }
